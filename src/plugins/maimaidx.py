@@ -217,7 +217,7 @@ BREAK: {chart['notes'][4]}
         except Exception:
             await query_chart.send("未找到该乐曲")
 
-
+'''
 wm_list = ['拼机', '推分', '越级', '下埋', '夜勤', '练底力', '练手法', '打旧框', '干饭', '抓绝赞', '收歌']
 
 
@@ -274,7 +274,7 @@ async def _(bot: Bot, event: Event, state: T_State):
     else:
         s = '\n'.join(result_set)
         await find_song.finish(f"您要找的可能是以下歌曲中的其中一首：\n{ s }")
-
+'''
 
 query_score = on_command('分数线')
 
