@@ -5,7 +5,7 @@ from PIL import Image
 from nonebot import on_command, on_message, on_notice, require, get_driver, on_regex
 from nonebot.typing import T_State
 from nonebot.adapters.cqhttp import Message, Event, Bot
-from src.libraries.image import *
+from src.libraries.maimaidx.image import *
 from random import randint
 
 

@@ -6,7 +6,7 @@ from typing import Optional, Dict, List
 
 import aiohttp
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
-from src.libraries.maimaidx_music import total_list
+from src.libraries.maimaidx.maimaidx_music import total_list
 
 
 scoreRank = 'D C B BB BBB A AA AAA S S+ SS SS+ SSS SSS+'.split(' ')

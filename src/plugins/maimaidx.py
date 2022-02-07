@@ -5,11 +5,11 @@ from nonebot.typing import T_State
 from nonebot.adapters import Event, Bot
 from nonebot.adapters.cqhttp import Message
 
-from src.libraries.tool import hash
-from src.libraries.maimaidx_music import *
-from src.libraries.image import *
-from src.libraries.maimai_best_40 import generate
-from src.libraries.maimai_best_50 import generate50
+from src.libraries.maimaidx.tool import hash
+from src.libraries.maimaidx.maimaidx_music import *
+from src.libraries.maimaidx.image import *
+from src.libraries.maimaidx.maimai_best_40 import generate
+from src.libraries.maimaidx.maimai_best_50 import generate50
 import re
 
 
