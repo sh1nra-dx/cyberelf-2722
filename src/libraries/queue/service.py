@@ -1,10 +1,9 @@
 from mysql import create_db_connection
 
-dbc = create_db_connection()
-cursor = dbc.cursor()
-
 def get_all():
+    dbc = create_db_connection()
     try:
+        cursor = dbc.cursor()
         query = "SELECT * FROM shop ORDER BY id ASC"
         cursor.execute(query)
         raw_data = cursor.fetchall()
@@ -18,18 +17,23 @@ def get_all():
                 'playerCount': d[5],
                 'updateTime': d[6].strftime('%Y-%m-%d %H:%M:%S'),
             })
+        cursor.close()
+        dbc.close()
         return {
             'error': False,
             'list': queue_list,
         }
     except:
+        dbc.close()
         return {
             'error': True,
             'msg': '数据查询失败，请稍后再试',
         }
 
 def get_one(command):
+    dbc = create_db_connection()
     try:
+        cursor = dbc.cursor()
         query = "SELECT * FROM shop WHERE command = %s LIMIT 1"
         cursor.execute(query, (command))
         raw_data = cursor.fetchone()
@@ -41,18 +45,23 @@ def get_one(command):
             'playerCount': raw_data[5],
             'updateTime': raw_data[6].strftime('%Y-%m-%d %H:%M:%S'),
         }
+        cursor.close()
+        dbc.close()
         return {
             'error': False,
             'info': queue_info,
         }
     except:
+        dbc.close()
         return {
             'error': True,
             'msg': '数据更新失败，请稍后再试',
         }
 
 def add_player(command, number):
+    dbc = create_db_connection()
     try:
+        cursor = dbc.cursor()
         select_query = "SELECT * FROM shop WHERE command = %s LIMIT 1"
         cursor.execute(select_query, (command))
         raw_data = cursor.fetchone()
@@ -73,19 +82,24 @@ def add_player(command, number):
             'playerCount': raw_data[5],
             'updateTime': raw_data[6].strftime('%Y-%m-%d %H:%M:%S'),
         }
+        cursor.close()
+        dbc.close()
         return {
             'error': False,
             'info': queue_info,
         }
     except:
         dbc.rollback()
+        dbc.close()
         return {
             'error': True,
             'msg': '数据更新失败，请稍后再试',
         }
 
 def del_player(command, number):
+    dbc = create_db_connection()
     try:
+        cursor = dbc.cursor()
         select_query = "SELECT * FROM shop WHERE command = %s LIMIT 1"
         cursor.execute(select_query, (command))
         raw_data = cursor.fetchone()
@@ -109,12 +123,15 @@ def del_player(command, number):
             'playerCount': raw_data[5],
             'updateTime': raw_data[6].strftime('%Y-%m-%d %H:%M:%S'),
         }
+        cursor.close()
+        dbc.close()
         return {
             'error': False,
             'info': queue_info,
         }
     except:
         dbc.rollback()
+        dbc.close()
         return {
             'error': True,
             'msg': '数据更新失败，请稍后再试',
