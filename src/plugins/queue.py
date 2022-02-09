@@ -32,13 +32,13 @@ async def _(bot: Bot, event: Event, state: T_State):
         })
     await all_stats.send(Message(msg))
 
-one_stat = on_regex(r"^\S+几卡$")
+one_stat = on_regex(r"^(.+)几卡$")
 
 @one_stat.handle()
 async def _(bot: Bot, event: Event, state: T_State):
-    regex = "^\S+几卡$"
-    res = re.match(regex, str(event.get_message()).lower())
-    command = res.group()[0]
+    regex = "^(.+)几卡$"
+    res = re.match(regex, str(event.get_message()).lower()).groups()
+    command = res[0]
     result = get_one(command)
     msg = []
     if not result['error']:
