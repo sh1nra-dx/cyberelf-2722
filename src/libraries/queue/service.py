@@ -64,7 +64,7 @@ def add_player(command, number):
         raw_data = cursor.fetchone()
         shop_id = raw_data[0]
         player_count = raw_data[5]
-        player_count += number
+        player_count += int(number)
         update_query = "UPDATE shop SET player_count = %s WHERE id = %s LIMIT 1"
         cursor.execute(update_query, (player_count, shop_id))
         dbc.commit()
@@ -97,10 +97,10 @@ def del_player(command, number):
         raw_data = cursor.fetchone()
         shop_id = raw_data[0]
         player_count = raw_data[5]
-        if (player_count - number) <= 0:
+        if (player_count - int(number)) <= 0:
             player_count = 0
         else:
-            player_count -= number
+            player_count -= int(number)
         update_query = "UPDATE shop SET player_count = %s WHERE id = %s LIMIT 1"
         cursor.execute(update_query, (player_count, shop_id))
         dbc.commit()

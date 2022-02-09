@@ -68,7 +68,7 @@ async def _(bot: Bot, event: Event, state: T_State):
     number = res[2]
     if res[1] == '+':
         result = add_player(command, number)
-    elif res[2] == '-':
+    elif res[1] == '-':
         result = del_player(command, number)
     else:
         result = get_one(command)
