@@ -58,17 +58,17 @@ async def _(bot: Bot, event: Event, state: T_State):
         })
     await one_stat.send(Message(msg))
 
-player_cal = on_regex(r"^\S+(\+|\-)\d+$")
+player_cal = on_regex(r"^(.+)(\+|\-)(\d+)$")
 
 @player_cal.handle()
 async def _(bot: Bot, event: Event, state: T_State):
-    regex = "^\S+(\+|\-)\d+$"
-    res = re.match(regex, str(event.get_message()).lower())
-    command = res.group()[0]
-    number = res.group()[2]
-    if res.group()[1] == '+':
+    regex = "^(.+)(\+|\-)(\d+)$"
+    res = re.match(regex, str(event.get_message()).lower()).groups()
+    command = res[0]
+    number = res[2]
+    if res[1] == '+':
         result = add_player(command, number)
-    elif res.group()[2] == '-':
+    elif res[2] == '-':
         result = del_player(command, number)
     else:
         result = get_one(command)
