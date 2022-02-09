@@ -1,12 +1,6 @@
-import pymysql
+from mysql import create_db_connection
 
-dbc = pymysql.connect(
-    host='127.0.0.1',
-    user='root',
-    passwd='',
-    port=3306,
-    db='mai_bot_data',
-    charset='utf8')
+dbc = create_db_connection()
 cursor = dbc.cursor()
 
 def get_all():
@@ -65,7 +59,7 @@ def add_player(command, number):
         shop_id = raw_data[0]
         player_count = raw_data[5]
         player_count += int(number)
-        update_query = "UPDATE shop SET player_count = %s WHERE id = %s LIMIT 1"
+        update_query = "UPDATE shop SET player_count = %s, update_time = NOW() WHERE id = %s LIMIT 1"
         cursor.execute(update_query, (player_count, shop_id))
         dbc.commit()
         select_query = "SELECT * FROM shop WHERE id = %s LIMIT 1"
@@ -101,7 +95,7 @@ def del_player(command, number):
             player_count = 0
         else:
             player_count -= int(number)
-        update_query = "UPDATE shop SET player_count = %s WHERE id = %s LIMIT 1"
+        update_query = "UPDATE shop SET player_count = %s, update_time = NOW() WHERE id = %s LIMIT 1"
         cursor.execute(update_query, (player_count, shop_id))
         dbc.commit()
         select_query = "SELECT * FROM shop WHERE id = %s LIMIT 1"
