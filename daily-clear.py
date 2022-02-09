@@ -2,7 +2,7 @@ from mysql import create_db_connection
 
 dbc = create_db_connection()
 try:
-    cursor = dbc.cursor
+    cursor = dbc.cursor()
     select_query = "SELECT id FROM shop"
     update_query = "UPDATE shop SET player_count = 0, update_time = NOW() WHERE id = %s LIMIT 1"
     cursor.execute(select_query)
