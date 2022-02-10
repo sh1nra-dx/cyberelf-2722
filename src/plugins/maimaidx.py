@@ -217,34 +217,6 @@ BREAK: {chart['notes'][4]}
         except Exception:
             await query_chart.send("未找到该乐曲")
 
-'''
-wm_list = ['拼机', '推分', '越级', '下埋', '夜勤', '练底力', '练手法', '打旧框', '干饭', '抓绝赞', '收歌']
-
-
-jrwm = on_command('今日舞萌', aliases={'今日mai'})
-
-
-@jrwm.handle()
-async def _(bot: Bot, event: Event, state: T_State):
-    qq = int(event.get_user_id())
-    h = hash(qq)
-    rp = h % 100
-    wm_value = []
-    for i in range(11):
-        wm_value.append(h & 3)
-        h >>= 2
-    s = f"今日人品值：{rp}\n"
-    for i in range(11):
-        if wm_value[i] == 3:
-            s += f'宜 {wm_list[i]}\n'
-        elif wm_value[i] == 0:
-            s += f'忌 {wm_list[i]}\n'
-    s += "千雪提醒您：打机时不要大力拍打或滑动哦\n今日推荐歌曲："
-    music = total_list[h % len(total_list)]
-    await jrwm.finish(Message([
-        {"type": "text", "data": {"text": s}}
-    ] + song_txt(music)))
-
 
 music_aliases = defaultdict(list)
 f = open('src/static/aliases.csv', 'r', encoding='utf-8')
@@ -274,7 +246,6 @@ async def _(bot: Bot, event: Event, state: T_State):
     else:
         s = '\n'.join(result_set)
         await find_song.finish(f"您要找的可能是以下歌曲中的其中一首：\n{ s }")
-'''
 
 query_score = on_command('分数线')
 
