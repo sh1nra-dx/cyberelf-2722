@@ -11,5 +11,7 @@ CREATE TABLE shop (
 ) ENGINE = InnoDB DEFAULT CHARSET = 'utf8';
 
 INSERT INTO shop (id, sname, command, cabinet_count, single_max_capacity,  update_time) VALUES
-(1, '疯狂牛仔城清远宝银旺店', 'nzc', 1, 10, NOW()),
-(2, '天空之城清远万达店', 'wd', 1, 10, NOW());
+(1, '疯狂牛仔城舞萌DX', 'nzcmai', 1, 10, NOW()),
+(2, '天空之城舞萌DX', 'wdmai', 1, 10, NOW())
+(3, '城市广场华卡音舞', 'cgwacca', 1, 8, NOW()),
+(4, '顺盈时代广场华卡音舞', 'sywacca', 1, 8, NOW());
