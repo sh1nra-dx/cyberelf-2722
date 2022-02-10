@@ -134,7 +134,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             },{
                 "type": "text",
                 "data": {
-                    "text": "\n\n您可以使用“[绿黄红紫白]id<歌曲编号>”指令查询单曲信息"
+                    "text": "\n您可以使用“[绿黄红紫白]id<歌曲编号>”指令查询单曲信息"
                 }
             }]))
     else:
