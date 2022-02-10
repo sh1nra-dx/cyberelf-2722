@@ -126,10 +126,17 @@ async def _(bot: Bot, event: Event, state: T_State):
         for music in sorted(res, key = lambda i: int(i['id'])):
             search_result += f"{music['id']}. {music['title']}\n"
         await search_music.finish(Message([
-            {"type": "text",
+            {
+                "type": "text",
                 "data": {
                     "text": search_result.strip()
-                }}]))
+                }
+            },{
+                "type": "text",
+                "data": {
+                    "text": "您可以使用“[绿黄红紫白]id<歌曲编号>”指令查询单曲信息"
+                }
+            }]))
     else:
         await search_music.send(f"结果过多（{len(res)} 条），请缩小查询范围。")
 
