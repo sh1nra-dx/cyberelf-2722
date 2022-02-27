@@ -48,9 +48,9 @@ async def bili_keyword(group_id, text):
             analysis_stat[group_id] = vurl
         if last_vurl == vurl:
             return
+        return msg
     except Exception as e:
-        msg = "bili_keyword Error: {}".format(type(e))
-    return msg
+        print("bili_keyword Error: {}".format(type(e)))
 
 
 async def b23_extract(text):
@@ -160,8 +160,7 @@ async def video_detail(url, page):
         msg = str(vurl) + str(title) + str(tname)
         return msg, vurl
     except Exception as e:
-        msg = "视频解析出错--Error: {}".format(type(e))
-        return msg, None
+        print("视频解析出错--Error: {}".format(type(e)))
 
 
 async def bangumi_detail(url):
@@ -202,7 +201,7 @@ async def bangumi_detail(url):
     except Exception as e:
         msg = "番剧解析出错--Error: {}".format(type(e))
         msg += f"\n{url}"
-        return msg, None
+        print(msg)
 
 
 async def live_detail(url):
@@ -244,8 +243,7 @@ async def live_detail(url):
         msg = str(vurl) + str(title) + str(up) + str(tags) + str(player)
         return msg, vurl
     except Exception as e:
-        msg = "直播间解析出错--Error: {}".format(type(e))
-        return msg, None
+        print("直播间解析出错--Error: {}".format(type(e)))
 
 
 async def article_detail(url, cvid):
@@ -268,8 +266,7 @@ async def article_detail(url, cvid):
         msg = str(vurl) + str(title) + str(up) + str(desc)
         return msg, vurl
     except Exception as e:
-        msg = "专栏解析出错--Error: {}".format(type(e))
-        return msg, None
+        print("专栏解析出错--Error: {}".format(type(e)))
 
 
 async def dynamic_detail(url):
@@ -305,5 +302,4 @@ async def dynamic_detail(url):
         msg = str(vurl) + str(content)
         return msg, vurl
     except Exception as e:
-        msg = "动态解析出错--Error: {}".format(type(e))
-        return msg, None
+        print("动态解析出错--Error: {}".format(type(e)))
