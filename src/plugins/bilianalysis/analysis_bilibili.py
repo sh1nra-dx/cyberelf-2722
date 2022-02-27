@@ -133,7 +133,7 @@ async def video_detail(url, page):
             res = await resp.json()
             res = res["data"]
         vurl = f"https://www.bilibili.com/video/av{res['aid']}"
-        title = f"\n标题：{res['title']}\n"
+        title = f"\n{res['title']}\n"
         if page:
             page = page[0].replace("&amp;", "&")
             p = int(page[3:])
@@ -141,20 +141,23 @@ async def video_detail(url, page):
                 vurl += f"?p={p}"
                 part = res["pages"][p - 1]["part"]
                 if part != res["title"]:
-                    title += f"小标题：{part}\n"
-        tname = f"类型：{res['tname']} | UP：{res['owner']['name']}\n"
-        stat = f"播放：{res['stat']['view']} | 弹幕：{res['stat']['danmaku']} | 收藏：{res['stat']['favorite']}\n"
-        stat += f"点赞：{res['stat']['like']} | 硬币：{res['stat']['coin']} | 评论：{res['stat']['reply']}\n"
-        desc = f"简介：{res['desc']}"
-        desc_list = desc.split("\n")
-        desc = ""
-        for i in desc_list:
-            if i:
-                desc += i + "\n"
-        desc_list = desc.split("\n")
-        if len(desc_list) > 4:
-            desc = desc_list[0] + "\n" + desc_list[1] + "\n" + desc_list[2] + "……"
-        msg = str(vurl) + str(title) + str(tname) + str(stat) + str(desc)
+                    title += f"分P：{part}\n"
+        tname = f"UP：{res['owner']['name']}\n"
+        tname += f"类型：{res['tname']}\n"
+        #tname = f"类型：{res['tname']} | UP：{res['owner']['name']}\n"
+        #stat = f"播放：{res['stat']['view']} | 弹幕：{res['stat']['danmaku']} | 收藏：{res['stat']['favorite']}\n"
+        #stat += f"点赞：{res['stat']['like']} | 硬币：{res['stat']['coin']} | 评论：{res['stat']['reply']}\n"
+        #desc = f"简介：{res['desc']}"
+        #desc_list = desc.split("\n")
+        #desc = ""
+        #for i in desc_list:
+        #    if i:
+        #        desc += i + "\n"
+        #desc_list = desc.split("\n")
+        #if len(desc_list) > 4:
+        #    desc = desc_list[0] + "\n" + desc_list[1] + "\n" + desc_list[2] + "……"
+        #msg = str(vurl) + str(title) + str(tname) + str(stat) + str(desc)
+        msg = str(vurl) + str(title) + str(tname)
         return msg, vurl
     except Exception as e:
         msg = "视频解析出错--Error: {}".format(type(e))
