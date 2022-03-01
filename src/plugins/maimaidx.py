@@ -3,7 +3,7 @@ from collections import defaultdict
 from nonebot import on_command, on_regex
 from nonebot.typing import T_State
 from nonebot.adapters import Event, Bot
-from nonebot.adapters.cqhttp import Message
+from nonebot.adapters.cqhttp import Message, MessageSegment
 
 from src.libraries.maimaidx.tool import hash
 from src.libraries.maimaidx.maimaidx_music import *
@@ -324,6 +324,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         await best_40_pic.send("该用户禁止了其他人获取数据。")
     else:
         await best_40_pic.send(Message([
+            MessageSegment.reply(event.message_id),
             {
                 "type": "image",
                 "data": {
@@ -349,6 +350,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         await best_50_pic.send("该用户禁止了其他人获取数据。")
     else:
         await best_50_pic.send(Message([
+            MessageSegment.reply(event.message_id),
             {
                 "type": "image",
                 "data": {
