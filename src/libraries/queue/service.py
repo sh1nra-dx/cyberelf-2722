@@ -17,7 +17,7 @@ def has_group(group_uim=None):
             dbc.close()
             return False
 
-def get_all(group_uim = None):
+def get_all(group_uim=None):
     if not has_group(group_uim):
         return {
             'error': True,
