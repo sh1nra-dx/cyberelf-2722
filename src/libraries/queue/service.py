@@ -12,7 +12,7 @@ def has_group(group_uim=None):
             raw_data = cursor.fetchone()
             cursor.close()
             dbc.close()
-            return True if raw_data[0] == 1 else False
+            return False if raw_data is None else True
         except:
             dbc.close()
             return False
