@@ -99,7 +99,7 @@ def add_player(command, number, group_uim=None):
         dbc = create_db_connection()
         try:
             cursor = dbc.cursor()
-            select_query = "SELECT shop.*, region.region_name FROM qun LEFT JOIN region USING (region_id) LEFT JOIN shop USING (region_id) WHERE qun.qun_uim = %s AND shop.command = %s LIMIT 1"
+            select_query = "SELECT shop.* FROM qun LEFT JOIN region USING (region_id) LEFT JOIN shop USING (region_id) WHERE qun.qun_uim = %s AND shop.command = %s LIMIT 1"
             cursor.execute(select_query, (group_uim, command))
             raw_data = cursor.fetchone()
             shop_id = raw_data[0]
@@ -118,7 +118,7 @@ def add_player(command, number, group_uim=None):
                 'maxCapacity': raw_data[5],
                 'playerCount': raw_data[6],
                 'updateTime': raw_data[7].strftime('%Y-%m-%d %H:%M:%S'),
-                'region': raw_data['8'],
+                'region': raw_data[8],
             }
             cursor.close()
             dbc.close()
@@ -131,7 +131,7 @@ def add_player(command, number, group_uim=None):
             dbc.close()
             return {
                 'error': True,
-                'msg': '数据更新失败，请稍后再试',
+                'msg': dbc.er,
             }
 
 def del_player(command, number, group_uim=None):
@@ -166,7 +166,7 @@ def del_player(command, number, group_uim=None):
                 'maxCapacity': raw_data[5],
                 'playerCount': raw_data[6],
                 'updateTime': raw_data[7].strftime('%Y-%m-%d %H:%M:%S'),
-                'region': raw_data['8'],
+                'region': raw_data[8],
             }
             cursor.close()
             dbc.close()
