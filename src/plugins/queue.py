@@ -12,7 +12,9 @@ all_stats = on_command('all_stats ', aliases={'机厅几卡'})
 
 @all_stats.handle()
 async def _(bot: Bot, event: Event, state: T_State):
-    result = get_all(group_uim=event.get_session_id())
+    session = str(event.get_session_id())
+    session.split('_')
+    result = get_all(group_uim=session[1])
     msg = []
     if not result['error']:
         for data in result['list']:
@@ -39,7 +41,9 @@ async def _(bot: Bot, event: Event, state: T_State):
     regex = "^(.+)几卡$"
     res = re.match(regex, str(event.get_message()).lower()).groups()
     command = res[0]
-    result = get_one(command, group_uim=event.get_session_id())
+    session = str(event.get_session_id())
+    session.split('_')
+    result = get_one(command, group_uim=session[1])
     msg = []
     if not result['error']:
         msg.append(build_msg(result['info']))
@@ -66,12 +70,14 @@ async def _(bot: Bot, event: Event, state: T_State):
     res = re.match(regex, str(event.get_message()).lower()).groups()
     command = res[0]
     number = res[2]
+    session = str(event.get_session_id())
+    session.split('_')
     if res[1] == '+':
-        result = add_player(command, number, group_uim=event.get_session_id())
+        result = add_player(command, number, group_uim=session[1])
     elif res[1] == '-':
-        result = del_player(command, number, group_uim=event.get_session_id())
+        result = del_player(command, number, group_uim=session[1])
     else:
-        result = get_one(command, group_uim=event.get_session_id())
+        result = get_one(command, group_uim=session[1])
     msg = []
     if not result['error']:
         msg.append(build_msg(result['info']))
