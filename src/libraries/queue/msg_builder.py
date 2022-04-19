@@ -15,6 +15,7 @@ def build_capacity(number, max_capacity, cabinet_count):
 
 def build_msg(data: dict):
     item = f'''[{data['name']}]
+地区：{data['region']}
 别名：{data['command']}
 机台数量：{data['cabinetCount']}
 当前人数：{data['playerCount']}人
