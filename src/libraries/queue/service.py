@@ -18,7 +18,7 @@ def has_group(group_uim=None):
             return False
 
 def get_all(group_uim = None):
-    if has_group(group_uim):
+    if not has_group(group_uim):
         return {
             'error': True,
             'msg': '当前群组未开通此功能，请联系管理员绑定',
@@ -55,7 +55,7 @@ def get_all(group_uim = None):
             }
 
 def get_one(command, group_uim=None):
-    if has_group(group_uim):
+    if not has_group(group_uim):
         return {
             'error': True,
             'msg': '当前群组未开通此功能，请联系管理员绑定',
@@ -90,7 +90,7 @@ def get_one(command, group_uim=None):
             }
 
 def add_player(command, number, group_uim=None):
-    if has_group(group_uim):
+    if not has_group(group_uim):
         return {
             'error': True,
             'msg': '当前群组未开通此功能，请联系管理员绑定',
@@ -135,7 +135,7 @@ def add_player(command, number, group_uim=None):
             }
 
 def del_player(command, number, group_uim=None):
-    if has_group(group_uim):
+    if not has_group(group_uim):
         return {
             'error': True,
             'msg': '当前群组未开通此功能，请联系管理员绑定',
