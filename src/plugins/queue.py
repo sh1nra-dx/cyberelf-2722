@@ -27,7 +27,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         msg.append({
             "type": "text",
             "data": {
-                "text": f""
+                "text": result['msg']
             }
         })
     await all_stats.send(Message(msg))
@@ -53,7 +53,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         msg.append({
             "type": "text",
             "data": {
-                "text": f""
+                "text": result['msg']
             }
         })
     await one_stat.send(Message(msg))
@@ -85,7 +85,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         msg.append({
             "type": "text",
             "data": {
-                "text": f""
+                "text": result['msg']
             }
         })
     await player_cal.send(Message(msg))
