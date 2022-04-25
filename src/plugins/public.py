@@ -16,16 +16,19 @@ help = on_command('help')
 @help.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     messages = []
+    title = '''CybeRELF#2722 implements mai-bot
+'''
     messages.append({
         "type": "text",
         "data": {
-            "text": "CybeRELF#2722 implements mai-bot"
+            "text": f"{title}"
         }
     })
     group_uim = get_group_uim(event)
 
     if has_group(group_uim, 'maimaidx'):
-        maimaidx_help_str = '''舞萌DX模块可用命令如下：
+        maimaidx_help_str = '''
+舞萌DX模块可用命令如下：
 · XXXmaimaiXXX什么： 随机一首歌
 · 随个[dx/标准][绿黄红紫白]<难度>： 随机一首指定条件的乐曲
 · 查歌<乐曲标题的一部分>： 查询符合条件的乐曲
