@@ -7,9 +7,9 @@ def has_group(group_uim=None, module=None):
     dbc = create_db_connection()
     try:
         cursor = dbc.cursor()
-        if module is 'maimaidx':
+        if module == 'maimaidx':
             query = "SELECT 1 FROM qun_maimaidx WHERE qun_uim = %s LIMIT 1"
-        elif module is 'queue':
+        elif module == 'queue':
             query = "SELECT 1 FROM qun_queue WHERE qun_uim = %s LIMIT 1"
         else:
             return False
