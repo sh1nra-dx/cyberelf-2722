@@ -19,7 +19,7 @@ async def _(bot: Bot, event: Event, state: T_State):
     messages.append({
         "type": "text",
         "data": {
-            "text": "CRH.EXE implements mai-bot"
+            "text": "CybeRELF#2722 implements mai-bot"
         }
     })
     group_uim = get_group_uim(event)
