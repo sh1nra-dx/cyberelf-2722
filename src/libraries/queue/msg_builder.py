@@ -14,7 +14,7 @@ def build_capacity(number, max_capacity, cabinet_count):
         return '[■■■■■] 十分拥挤'
 
 def build_msg(data: dict):
-    item = f'''({data['command']}) {data['name']}
+    item = f'''[{data['name']} ({data['command']})]
 当前人数：{data['playerCount']}人
 拥挤度：{build_capacity(data['playerCount'], data['maxCapacity'], data['cabinetCount'])}
 更新时间：{data['updateTime']}
