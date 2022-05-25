@@ -4,6 +4,7 @@ from nonebot import on_command, on_regex
 from nonebot.typing import T_State
 from nonebot.adapters import Event, Bot
 from nonebot.adapters.cqhttp import Message, MessageSegment
+from libraries.maimaidx.maimai_best_chart_share import cache40, cache50
 
 from src.libraries.maimaidx.tool import hash
 from src.libraries.maimaidx.maimaidx_music import *
@@ -322,7 +323,95 @@ BREAK 50落(一共{brk}个)等价于 {(break_50_reduce / 100):.3f} 个 TAP GREAT
                 await query_chart.send("格式错误，输入“分数线 帮助”以查看帮助信息")
 
 
-best_40_pic = on_command('b40')
+best_40_share = on_command('b40')
+
+@best_40_share.handle()
+async def _(bot: Bot, event: Event, state: T_State):
+    group_uim = get_group_uim(event)
+    if has_group(group_uim, 'maimaidx'):
+        username = str(event.get_message()).strip()
+        if username == "":
+            payload = {'qq': str(event.get_user_id())}
+        else:
+            payload = {'username': username}
+        status, user, url = await cache40(payload)
+        if status == 4001:
+            await best_40_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": "未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。",
+                },
+            }]))
+        elif status == 4031:
+            await best_40_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": "该用户禁止了其他人获取数据。",
+                },
+            }]))
+        elif status != 200:
+            await best_40_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": "MaiRating服务端出现错误，请稍后重试。",
+                },
+            }]))
+        else:
+            await best_40_share.send(Message([{
+                "type": "share",
+                "data": {
+                    "url": url,
+                    "title": user + " Best40曲目清单",
+                    "image": "https://rating.xbuster.moe/images/share_logo.png",
+                },
+            }]))
+
+
+best_50_share = on_command('b50')
+
+@best_50_share.handle()
+async def _(bot: Bot, event: Event, state: T_State):
+    group_uim = get_group_uim(event)
+    if has_group(group_uim, 'maimaidx'):
+        username = str(event.get_message()).strip()
+        if username == "":
+            payload = {'qq': str(event.get_user_id()),'b50':True}
+        else:
+            payload = {'username': username,'b50':True}
+        status, user, url = await cache50(payload)
+        if status == 4001:
+            await best_50_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": "未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。",
+                },
+            }]))
+        elif status == 4031:
+            await best_50_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": "该用户禁止了其他人获取数据。",
+                },
+            }]))
+        elif status != 200:
+            await best_50_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": "MaiRating服务端出现错误，请稍后重试。",
+                },
+            }]))
+        else:
+            await best_50_share.send(Message([{
+                "type": "share",
+                "data": {
+                    "url": url,
+                    "title": user + " Best40曲目清单",
+                    "image": "https://rating.xbuster.moe/images/share_logo.png",
+                },
+            }]))
+
+
+best_40_pic = on_command('b40pic')
 
 
 @best_40_pic.handle()
@@ -350,7 +439,7 @@ async def _(bot: Bot, event: Event, state: T_State):
                 }
             ]))
 
-best_50_pic = on_command('b50')
+best_50_pic = on_command('b50pic')
 
 
 @best_50_pic.handle()
