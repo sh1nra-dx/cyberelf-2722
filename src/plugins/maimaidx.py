@@ -335,7 +335,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             {
                 "type": "text",
                 "data": {
-                    "text": f"\n请求已收到，请稍等片刻......",
+                    "text": f"请求已收到，请稍等片刻......",
                 },
             },
         ]))
@@ -387,7 +387,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             {
                 "type": "text",
                 "data": {
-                    "text": f"\n请求已收到，请稍等片刻......",
+                    "text": f"请求已收到，请稍等片刻......",
                 },
             },
         ]))
