@@ -360,16 +360,16 @@ async def _(bot: Bot, event: Event, state: T_State):
             await best_40_share.send(Message([
                 MessageSegment.reply(event.message_id),
                 {
+                    "type": "image",
+                    "data": {
+                        "file": f"base64://{get_cover()}"
+                    }
+                },
+                {
                     "type": "text",
                     "data": {
                         "text": f"\n{user}的Best 40歌曲清单\n",
                     },
-                },
-                {
-                    "type": "image",
-                    "data": {
-                        "file": f"base64://{str(get_cover(), encoding='utf-8')}"
-                    }
                 },
                 {
                     "type": "text",
@@ -414,14 +414,27 @@ async def _(bot: Bot, event: Event, state: T_State):
                 },
             }]))
         else:
-            await best_50_share.send(Message([{
-                "type": "share",
-                "data": {
-                    "url": url,
-                    "title": user + " 的Best50曲目清单",
-                    "image": "https://rating.xbuster.moe/images/share_logo.png",
+            await best_50_share.send(Message([
+                MessageSegment.reply(event.message_id),
+                {
+                    "type": "image",
+                    "data": {
+                        "file": f"base64://{get_cover()}"
+                    }
                 },
-            }]))
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"\n{user}的Best 50歌曲清单\n",
+                    },
+                },
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"\n{url}",
+                    },
+                },
+            ]))
 
 
 best_40_pic = on_command('b40pic')
