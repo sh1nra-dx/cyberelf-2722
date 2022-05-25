@@ -357,12 +357,18 @@ async def _(bot: Bot, event: Event, state: T_State):
                 },
             }]))
         else:
-            await best_40_share.send(Message([{
+            '''await best_40_share.send(Message([{
                 "type": "share",
                 "data": {
                     "url": url,
                     "title": user + " 的Best40曲目清单",
                     "image": "https://rating.xbuster.moe/images/share_logo.png",
+                },
+            }]))'''
+            await best_40_share.send(Message([{
+                "type": "text",
+                "data": {
+                    "text": f"{user} 的Best 40歌曲清单：{url}",
                 },
             }]))
 
