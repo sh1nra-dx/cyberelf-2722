@@ -323,172 +323,106 @@ BREAK 50落(一共{brk}个)等价于 {(break_50_reduce / 100):.3f} 个 TAP GREAT
                 await query_chart.send("格式错误，输入“分数线 帮助”以查看帮助信息")
 
 
-best_40_share = on_command('b40')
-
-@best_40_share.handle()
-async def _(bot: Bot, event: Event, state: T_State):
-    group_uim = get_group_uim(event)
-    if has_group(group_uim, 'maimaidx'):
-        username = str(event.get_message()).strip()
-        if username == "":
-            payload = {'qq': str(event.get_user_id())}
-        else:
-            payload = {'username': username}
-        status, user, url = await cache40(payload)
-        if status == 4001:
-            await best_40_share.send(Message([{
-                "type": "text",
-                "data": {
-                    "text": "未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。",
-                },
-            }]))
-        elif status == 4031:
-            await best_40_share.send(Message([{
-                "type": "text",
-                "data": {
-                    "text": "该用户禁止了其他人获取数据。",
-                },
-            }]))
-        elif status != 200:
-            await best_40_share.send(Message([{
-                "type": "text",
-                "data": {
-                    "text": "MaiRating服务端出现错误，请稍后重试。",
-                },
-            }]))
-        else:
-            await best_40_share.send(Message([
-                MessageSegment.reply(event.message_id),
-                {
-                    "type": "image",
-                    "data": {
-                        "file": f"base64://{get_cover()}"
-                    }
-                },
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"\n{user}的Best 40歌曲清单\n",
-                    },
-                },
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"\n{url}",
-                    },
-                },
-            ]))
-
-
-best_50_share = on_command('b50')
-
-@best_50_share.handle()
-async def _(bot: Bot, event: Event, state: T_State):
-    group_uim = get_group_uim(event)
-    if has_group(group_uim, 'maimaidx'):
-        username = str(event.get_message()).strip()
-        if username == "":
-            payload = {'qq': str(event.get_user_id()), 'b50': True}
-        else:
-            payload = {'username': username, 'b50': True}
-        status, user, url = await cache50(payload)
-        if status == 4001:
-            await best_50_share.send(Message([{
-                "type": "text",
-                "data": {
-                    "text": "未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。",
-                },
-            }]))
-        elif status == 4031:
-            await best_50_share.send(Message([{
-                "type": "text",
-                "data": {
-                    "text": "该用户禁止了其他人获取数据。",
-                },
-            }]))
-        elif status != 200:
-            await best_50_share.send(Message([{
-                "type": "text",
-                "data": {
-                    "text": "MaiRating服务端出现错误，请稍后重试。",
-                },
-            }]))
-        else:
-            await best_50_share.send(Message([
-                MessageSegment.reply(event.message_id),
-                {
-                    "type": "image",
-                    "data": {
-                        "file": f"base64://{get_cover()}"
-                    }
-                },
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"\n{user}的Best 50歌曲清单\n",
-                    },
-                },
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"\n{url}",
-                    },
-                },
-            ]))
-
-
-best_40_pic = on_command('b40pic')
+best_40_pic = on_command('b40')
 
 
 @best_40_pic.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     group_uim = get_group_uim(event)
     if has_group(group_uim, 'maimaidx'):
+        await best_40_pic.send(Message([
+            MessageSegment.reply(event.message_id),
+            {
+                "type": "text",
+                "data": {
+                    "text": f"\n请求已收到，请稍等片刻......",
+                },
+            },
+        ]))
         username = str(event.get_message()).strip()
         if username == "":
             payload = {'qq': str(event.get_user_id())}
         else:
             payload = {'username': username}
         img, success = await generate(payload)
+        status, user, url = await cache40(payload)
         if success == 400:
             await best_40_pic.send("未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。")
         elif success == 403:
             await best_40_pic.send("该用户禁止了其他人获取数据。")
+        elif status != 200:
+            await best_40_pic.send("MaiRating服务出现异常。")
         else:
             await best_40_pic.send(Message([
                 MessageSegment.reply(event.message_id),
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"{user}的Best 40歌曲清单\n",
+                    },
+                },
                 {
                     "type": "image",
                     "data": {
                         "file": f"base64://{str(image_to_base64(img), encoding='utf-8')}"
                     }
-                }
+                },
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"\n{url}",
+                    },
+                },
             ]))
 
-best_50_pic = on_command('b50pic')
+best_50_pic = on_command('b50')
 
 
 @best_50_pic.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     group_uim = get_group_uim(event)
     if has_group(group_uim, 'maimaidx'):
+        await best_50_pic.send(Message([
+            MessageSegment.reply(event.message_id),
+            {
+                "type": "text",
+                "data": {
+                    "text": f"\n请求已收到，请稍等片刻......",
+                },
+            },
+        ]))
         username = str(event.get_message()).strip()
         if username == "":
             payload = {'qq': str(event.get_user_id()),'b50':True}
         else:
             payload = {'username': username,'b50':  True}
         img, success = await generate50(payload)
+        status, user, url = await cache50(payload)
         if success == 400:
             await best_50_pic.send("未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。")
         elif success == 403:
             await best_50_pic.send("该用户禁止了其他人获取数据。")
+        elif status != 200:
+            await best_40_pic.send("MaiRating服务出现异常。")
         else:
             await best_50_pic.send(Message([
                 MessageSegment.reply(event.message_id),
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"{user}的Best 50歌曲清单\n",
+                    },
+                },
                 {
                     "type": "image",
                     "data": {
                         "file": f"base64://{str(image_to_base64(img), encoding='utf-8')}"
                     }
-                }
+                },
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"\n{url}",
+                    },
+                },
             ]))
