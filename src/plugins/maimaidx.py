@@ -4,7 +4,7 @@ from nonebot import on_command, on_regex
 from nonebot.typing import T_State
 from nonebot.adapters import Event, Bot
 from nonebot.adapters.cqhttp import Message, MessageSegment
-from src.libraries.maimaidx.maimai_best_chart_share import cache40, cache50, get_cover
+from src.libraries.maimaidx.maimai_best_chart_share import cache40, cache50
 
 from src.libraries.maimaidx.tool import hash
 from src.libraries.maimaidx.maimaidx_music import *
