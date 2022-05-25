@@ -368,7 +368,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             await best_40_share.send(Message([{
                 "type": "text",
                 "data": {
-                    "text": f"{user} 的Best 40歌曲清单：{url}",
+                    "text": f"[CQ:share,url={url},title={user}的Best40歌曲清单,image=https://rating.xbuster.moe/images/share_logo.png]",
                 },
             }]))
 
