@@ -4,7 +4,7 @@ from nonebot import on_command, on_regex
 from nonebot.typing import T_State
 from nonebot.adapters import Event, Bot
 from nonebot.adapters.cqhttp import Message, MessageSegment
-from src.libraries.maimaidx.maimai_best_chart_share import cache40, cache50
+from src.libraries.maimaidx.maimai_best_chart_share import cache40, cache50, get_cover
 
 from src.libraries.maimaidx.tool import hash
 from src.libraries.maimaidx.maimaidx_music import *
@@ -358,7 +358,25 @@ async def _(bot: Bot, event: Event, state: T_State):
             }]))
         else:
             await best_40_share.send(Message([
-                MessageSegment.share(url=url, title=f"{user}的Best 40曲目清单", image="https://rating.xbuster.moe/images/share_logo.png")
+                MessageSegment.reply(event.message_id),
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"\n{user}的Best 40歌曲清单\n",
+                    },
+                },
+                {
+                    "type": "image",
+                    "data": {
+                        "file": f"base64://{str(get_cover(), encoding='utf-8')}"
+                    }
+                },
+                {
+                    "type": "text",
+                    "data": {
+                        "text": f"\n{url}",
+                    },
+                },
             ]))
 
 
