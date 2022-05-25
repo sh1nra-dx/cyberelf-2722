@@ -23,7 +23,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             msg.append({
                 "type": "text",
                 "data": {
-                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzc+2"
+                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzcmai+2"
                 }
             })
         else:
@@ -51,7 +51,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             msg.append({
                 "type": "text",
                 "data": {
-                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzc+2"
+                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzcmai+2"
                 }
             })
         else:
@@ -85,7 +85,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             msg.append({
                 "type": "text",
                 "data": {
-                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzc+2"
+                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzcmai+2"
                 }
             })
         else:
