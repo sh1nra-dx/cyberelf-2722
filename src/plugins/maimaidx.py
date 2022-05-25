@@ -361,7 +361,7 @@ async def _(bot: Bot, event: Event, state: T_State):
                 "type": "share",
                 "data": {
                     "url": url,
-                    "title": user + " Best40曲目清单",
+                    "title": user + " 的Best40曲目清单",
                     "image": "https://rating.xbuster.moe/images/share_logo.png",
                 },
             }]))
@@ -375,9 +375,9 @@ async def _(bot: Bot, event: Event, state: T_State):
     if has_group(group_uim, 'maimaidx'):
         username = str(event.get_message()).strip()
         if username == "":
-            payload = {'qq': str(event.get_user_id()),'b50':True}
+            payload = {'qq': str(event.get_user_id()), 'b50': True}
         else:
-            payload = {'username': username,'b50':True}
+            payload = {'username': username, 'b50': True}
         status, user, url = await cache50(payload)
         if status == 4001:
             await best_50_share.send(Message([{
@@ -405,7 +405,7 @@ async def _(bot: Bot, event: Event, state: T_State):
                 "type": "share",
                 "data": {
                     "url": url,
-                    "title": user + " Best40曲目清单",
+                    "title": user + " 的Best50曲目清单",
                     "image": "https://rating.xbuster.moe/images/share_logo.png",
                 },
             }]))
