@@ -5,7 +5,7 @@ from nonebot.typing import T_State
 from nonebot.adapters import Event, Bot
 from nonebot.adapters.cqhttp import Message
 
-from src.libraries.queue.service import get_all, get_one, add_player, del_player
+from src.libraries.queue.service import get_all, get_one, set_player
 from src.libraries.queue.msg_builder import build_msg
 from src.libraries.dbutil import has_group, get_group_uim
 
@@ -23,7 +23,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             msg.append({
                 "type": "text",
                 "data": {
-                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzcmai+2"
+                    "text": "*若要调整排队人数，请使用“<机厅别名>=<人数>”。\n如：nzmai=2"
                 }
             })
         else:
@@ -51,7 +51,7 @@ async def _(bot: Bot, event: Event, state: T_State):
             msg.append({
                 "type": "text",
                 "data": {
-                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzcmai+2"
+                    "text": "*若要调整排队人数，请使用“<机厅别名>=<人数>”。\n如：nzmai=2"
                 }
             })
         else:
@@ -63,29 +63,24 @@ async def _(bot: Bot, event: Event, state: T_State):
             })
         await one_stat.send(Message(msg))
 
-player_cal = on_regex(r"^(.+)(\+|\-)(\d+)$")
+player_cal = on_regex(r"^(.+)=(\d+)$")
 
 @player_cal.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     group_uim = get_group_uim(event)
     if has_group(group_uim, 'queue'):
-        regex = "^(.+)(\+|\-)(\d+)$"
+        regex = "^(.+)=(\d+)$"
         res = re.match(regex, str(event.get_message()).lower()).groups()
         command = res[0]
         number = res[2]
-        if res[1] == '+':
-            result = add_player(command, number, group_uim)
-        elif res[1] == '-':
-            result = del_player(command, number, group_uim)
-        else:
-            result = get_one(command, group_uim)
+        result = set_player(command, number, group_uim)
         msg = []
         if not result['error']:
             msg.append(build_msg(result['info']))
             msg.append({
                 "type": "text",
                 "data": {
-                    "text": f"*若要增减排队人数，请使用“<机厅别名>[+/-]<人数>”。\n如：nzcmai+2"
+                    "text": "*若要调整排队人数，请使用“<机厅别名>=<人数>”。\n如：nzmai=2"
                 }
             })
         else:

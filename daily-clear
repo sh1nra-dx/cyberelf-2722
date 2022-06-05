@@ -3,5 +3,5 @@
 $dbc = mysqli_connect('127.0.0.1', 'root', '123456', 'mai_bot_data');
 mysqli_set_charset($dbc, 'utf8');
 
-mysqli_query($dbc, 'UPDATE shop SET player_count = 0');
+mysqli_query($dbc, 'UPDATE queue_shop SET player_count = 0');
 
