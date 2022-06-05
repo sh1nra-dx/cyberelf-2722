@@ -4,7 +4,7 @@ def get_all(group_uim=None):
     dbc = create_db_connection()
     try:
         cursor = dbc.cursor()
-        query = "SELECT shop.*, region.region_name FROM qun_queue LEFT JOIN queue_region USING (region_id) LEFT JOIN queue_shop USING (region_id) WHERE qun_queue.qun_uim = %s ORDER BY shop_id ASC"
+        query = "SELECT queue_shop.*, queue_region.region_name FROM qun_queue LEFT JOIN queue_region USING (region_id) LEFT JOIN queue_shop USING (region_id) WHERE qun_queue.qun_uim = %s ORDER BY shop_id ASC"
         cursor.execute(query, (group_uim))
         raw_data = cursor.fetchall()
         queue_list = []
@@ -35,7 +35,7 @@ def get_one(command, group_uim=None):
     dbc = create_db_connection()
     try:
         cursor = dbc.cursor()
-        query = "SELECT shop.*, region.region_name FROM qun_queue LEFT JOIN queue_region USING (region_id) LEFT JOIN queue_shop USING (region_id) WHERE qun_queue.qun_uim = %s AND queue_shop.command = %s LIMIT 1"
+        query = "SELECT queue_shop.*, queue_region.region_name FROM qun_queue LEFT JOIN queue_region USING (region_id) LEFT JOIN queue_shop USING (region_id) WHERE qun_queue.qun_uim = %s AND queue_shop.command = %s LIMIT 1"
         cursor.execute(query, (group_uim, command))
         raw_data = cursor.fetchone()
         queue_info = {
