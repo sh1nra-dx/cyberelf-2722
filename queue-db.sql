@@ -40,10 +40,10 @@ INSERT INTO queue_region (region_id, region_name) VALUES
 
 INSERT INTO queue_shop (shop_id, region_id, shop_name, command, cabinet_count, single_max_capacity, update_time) VALUES
 /* 清远 */
-(0, 1, '疯狂牛仔城舞萌DX', 'nzmai', 1, 8, NOW()),
-(0, 1, '天空之城舞萌DX', 'wdmai', 1, 8, NOW()),
-(0, 1, '极限主场舞萌DX', 'cgmai', 1, 8, NOW()),
-(0, 1, '欢乐拾光舞萌DX', 'drfmai', 1, 8, NOW()),
+(0, 1, '牛仔城舞萌DX', 'nzmai', 1, 8, NOW()),
+(0, 1, '万达舞萌DX', 'wdmai', 1, 8, NOW()),
+(0, 1, '城广舞萌DX', 'cgmai', 1, 8, NOW()),
+(0, 1, '大润发舞萌DX', 'drfmai', 1, 8, NOW()),
 (0, 1, '极限主场华卡音舞', 'cgwa', 2, 5, NOW()),
 (0, 1, '开心主场华卡音舞', 'sywa', 2, 5, NOW()),
 /* 贵阳 */
