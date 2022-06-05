@@ -72,7 +72,7 @@ async def _(bot: Bot, event: Event, state: T_State):
         regex = "^(.+)=(\d+)$"
         res = re.match(regex, str(event.get_message()).lower()).groups()
         command = res[0]
-        number = res[2]
+        number = res[1]
         result = set_player(command, number, group_uim)
         msg = []
         if not result['error']:
