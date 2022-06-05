@@ -345,13 +345,13 @@ async def _(bot: Bot, event: Event, state: T_State):
         else:
             payload = {'username': username}
         img, success = await generate(payload)
-        status, user, url = await cache40(payload)
+        #status, user, url = await cache40(payload)
         if success == 400:
             await best_40_pic.send("未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。")
         elif success == 403:
             await best_40_pic.send("该用户禁止了其他人获取数据。")
-        elif status != 200:
-            await best_40_pic.send("MaiRating服务出现异常。")
+        #elif status != 200:
+        #    await best_40_pic.send("MaiRating服务出现异常。")
         else:
             await best_40_pic.send(Message([
                 MessageSegment.reply(event.message_id),
@@ -367,12 +367,12 @@ async def _(bot: Bot, event: Event, state: T_State):
                         "file": f"base64://{str(image_to_base64(img), encoding='utf-8')}"
                     }
                 },
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"\n{url}",
-                    },
-                },
+                #{
+                #    "type": "text",
+                #    "data": {
+                #        "text": f"\n{url}",
+                #    },
+                #},
             ]))
 
 best_50_pic = on_command('b50')
@@ -397,13 +397,13 @@ async def _(bot: Bot, event: Event, state: T_State):
         else:
             payload = {'username': username,'b50':  True}
         img, success = await generate50(payload)
-        status, user, url = await cache50(payload)
+        #status, user, url = await cache50(payload)
         if success == 400:
             await best_50_pic.send("未找到此玩家，请确保此玩家的用户名和查分器中的用户名相同。")
         elif success == 403:
             await best_50_pic.send("该用户禁止了其他人获取数据。")
-        elif status != 200:
-            await best_40_pic.send("MaiRating服务出现异常。")
+        #elif status != 200:
+        #    await best_40_pic.send("MaiRating服务出现异常。")
         else:
             await best_50_pic.send(Message([
                 MessageSegment.reply(event.message_id),
@@ -419,10 +419,10 @@ async def _(bot: Bot, event: Event, state: T_State):
                         "file": f"base64://{str(image_to_base64(img), encoding='utf-8')}"
                     }
                 },
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"\n{url}",
-                    },
-                },
+                #{
+                #    "type": "text",
+                #    "data": {
+                #        "text": f"\n{url}",
+                #    },
+                #},
             ]))
