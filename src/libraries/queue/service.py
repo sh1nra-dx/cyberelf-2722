@@ -64,7 +64,7 @@ def set_player(command, number, group_uim=None):
     dbc = create_db_connection()
     try:
         cursor = dbc.cursor()
-        select_query = "SELECT shop.* FROM qun_queue LEFT JOIN queue_region USING (region_id) LEFT JOIN queue_shop USING (region_id) WHERE qun_queue.qun_uim = %s AND queue_shop.command = %s LIMIT 1"
+        select_query = "SELECT queue_shop.* FROM qun_queue LEFT JOIN queue_region USING (region_id) LEFT JOIN queue_shop USING (region_id) WHERE qun_queue.qun_uim = %s AND queue_shop.command = %s LIMIT 1"
         cursor.execute(select_query, (group_uim, command))
         raw_data = cursor.fetchone()
         shop_id = raw_data[0]
