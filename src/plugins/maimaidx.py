@@ -355,12 +355,12 @@ async def _(bot: Bot, event: Event, state: T_State):
         else:
             await best_40_pic.send(Message([
                 MessageSegment.reply(event.message_id),
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"{user}的Best 40歌曲清单\n",
-                    },
-                },
+                #{
+                #    "type": "text",
+                #    "data": {
+                #        "text": f"{user}的Best 40歌曲清单\n",
+                #    },
+                #},
                 {
                     "type": "image",
                     "data": {
@@ -407,12 +407,12 @@ async def _(bot: Bot, event: Event, state: T_State):
         else:
             await best_50_pic.send(Message([
                 MessageSegment.reply(event.message_id),
-                {
-                    "type": "text",
-                    "data": {
-                        "text": f"{user}的Best 50歌曲清单\n",
-                    },
-                },
+                #{
+                #    "type": "text",
+                #    "data": {
+                #        "text": f"{user}的Best 50歌曲清单\n",
+                #    },
+                #},
                 {
                     "type": "image",
                     "data": {
